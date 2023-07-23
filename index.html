@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário do Jogador</title>
+  <style>
+   body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+    header {
+        background-color: #c5f0d8;
+        text-align: center;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .nav-buttons {
+        display: flex;
+        justify-content: space-around;
+        width: 500px;
+    }
+.nav-buttons a {
+        display: inline-block;
+        padding: 10px 129px;
+        background-color: #68dfe7;
+        color: #11130d;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+    .nav-buttons a:hover {
+        background-color: #2b631d;
+        color: #fff;
+    }
+
+  .detalhes-atributos {
+    margin-left: 80px; 
+  }
+</style>
+</head>
+<body>
+    <header>
+      <div class="nav-buttons">
+        <a href="#">Biografia</a>
+        <a href="#">Detalhes do Jogador</a>
+        <a href="#">Detalhe dos Atributos</a>
+        <a href="#">Perfil do Ídolo</a>
+     
+    </header>
+    <main>            
+     <form id="jogadorForm"> </div>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" required><br>
+      
+        <label for="time">Time:</label>
+        <input type="text" id="time" required><br>
+      
+        <label for="idade">Idade:</label>
+        <input type="number" id="idade" required><br>
+      
+        <label for="aceleracao">Aceleração:</label>
+        <input type="number" id="aceleracao"><br>
+      
+        <label for="velocidadeSprint">Velocidade de Sprint:</label>
+        <input type="number" id="velocidadeSprint"><br>
+      
+        <label for="finalizacao">Finalização:</label>
+        <input type="number" id="finalizacao"><br>
+      
+        <label for="forcaChute">Força do Chute:</label>
+        <input type="number" id="forcaChute"><br>
+        
+        <label for="ChuteLongos">Chute Longos:</label>
+        <input type="number" id="chutosLongos"><br>
+
+        <label for="penaltis">Pênaltis:</label>
+        <input type="number" id="penaltis"><br>
+
+        <label for="visao">Visão:</label>
+        <input type="number" id="visao"><br>
+      
+        <label for="cruzamentos">Cruzamentos:</label>
+        <input type="number" id="cruzamentos"><br>
+
+        <label for="agilidade">Agilidade:</label>
+        <input type="number" id="agilidade"><br>
+
+        <label for="dribles">Dribes:</label>
+        <input type="number" id="dribles"><br>
+        
+        <button type="button" id="btnSalvar">Salvar</button>
+  
+      </form> </div>
+          
+    </main>
+  
+  <script>
+    const btnBiografia = document.getElementById('btnBiografia-link');
+    const playerPhoto = document.querySelector('.foto-jogado');
+  
+    btnBiografia.addEventListener('click', () => {
+      
+      const isHidden = playerPhoto.style.display === 'none';
+  
+      
+      playerPhoto.style.display = isHidden ? 'block' : 'none';
+    });
+  </script>
+  <script>
+
+
+btnBiografia.addEventListener('click', () => {
+    const isHidden = detalhesAtributos.style.display === 'none';
+    detalhesAtributos.
+    detalhes
+style.display = isHidden ? 'block' : 'none';
+});
+    const btnDetalhes = document.getElementById('btnDetalhes');
+    const detalhesAtributos = document.querySelector('.detalhes-atributos');
+  
+    btnDetalhes.addEventListener('click', () => {
+     
+      const isHidden = detalhesAtributos.style.display === 'none';
+  
+    
+      detalhesAtributos.style.display = isHidden ? 'block' : 'none';
+    });
+  
+  
+    const jogadorForm = document.getElementById('jogadorForm');
+
+    jogadorForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const nome = document.getElementById('nome').value;
+      const time = document.getElementById('time').value;
+     
+      const jogadorData = {
+        nome,
+        time,
+       
+      };
+
+      fetch('/salvarJogador', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(jogadorData),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Resposta do servidor:', data);
+        
+      })
+      fetch('/obterJogador')
+        .then(response => response.json())
+        .then(jogadorData => {
+         
+          if (Object.keys(jogadorData).length > 0) {
+            document.getElementById('nome').value = jogadorData.nome;
+            document.getElementById('time').value = jogadorData.time;
+          
+          }
+        })
+      .catch(error => {
+        console.error('Erro ao enviar os dados do jogador:', error);
+     
+    });
+    });
+    
+  </script>
+</body>
+</html>
