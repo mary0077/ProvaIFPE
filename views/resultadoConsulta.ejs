@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Resultado da Consulta</title>
+</head>
+<body>
+  <h1>Resultado da Consulta</h1>
+
+  <% if (jogadores.length > 0) { %>
+    <table>
+      <tr>
+        <th>Nome</th>
+        <th>Time</th>
+      </tr>
+      <% jogadores.forEach(jogador => { %>
+        <tr>
+          <td><%= jogador.nome %></td>
+          <td><%= jogador.time %></td>
+        </tr>
+      <% }) %>
+    </table>
+  <% } else { %>
+    <p>Nenhum jogador encontrado.</p>
+  <% } %>
+</body>
+</html>

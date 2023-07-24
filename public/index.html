@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário do Jogador</title>
+  <style>
+   body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+    header {
+        background-color: #77ebab;
+        text-align: center;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .nav-buttons {
+        display: flex;
+        justify-content: space-around;
+        width: 500px;
+    }
+.nav-buttons a {
+        display: inline-block;
+        padding: 10px 129px;
+        background-color: #bbd839;
+        color: #11130d;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+    .nav-buttons a:hover {
+        background-color: #1e34af;
+        color: #fff;
+    }
+
+  .detalhes-atributos {
+    margin-left: 80px; 
+  }
+</style>
+</head>
+<body style="background-image: url(./ronaldo.jpg); background-attachment: fixed; background-repeat: no-repeat; background-position: center center;"  >
+  <br>
+    <header>
+      <div class="nav-buttons">
+        <a href="#">Biografia</a>
+        <a href="/resultadoConsulta">Detalhes do Jogador</a>
+        <a href="/resultadoConsulta">Detalhes dos Atributos</a>
+        <a href="#">Perfil do Ídolo</a>
+     
+      </div>
+    </header>
+    <br><br><br><br><br><br>
+    <main>        
+      <form action="/salvarJogador" method="post" id="jogadorForm">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required><br>
+        <br>
+        <label for="time">Time:</label>
+        <input type="text" id="time" name="time" required><br>
+        <br>
+        <label for="idade">Idade:</label>
+        <input type="number" id="idade" name="idade" required><br>
+        <br>
+        <label for="aceleracao">Aceleração:</label>
+        <input type="number" id="aceleracao" name="aceleracao"><br>
+        <br>
+        <label for="velocidadeSprint">Velocidade de Sprint:</label>
+        <input type="number" id="velocidadeSprint" name="velocidadeSprint"><br>
+        <br>
+        <label for="finalizacao">Finalização:</label>
+        <input type="number" id="finalizacao" name="finalizacao"><br>
+        <br>
+        <label for="forcaChute">Força do Chute:</label>
+        <input type="number" id="forcaChute" name="forcaChute"><br>
+        <br>
+        <label for="chutesLongos">Chutes Longos:</label>
+        <input type="number" id="chutesLongos" name="chutesLongos"><br>
+        <br>
+        <label for="penaltis">Pênaltis:</label>
+        <input type="number" id="penaltis" name="penaltis"><br>
+        <br>
+        <label for="visao">Visão:</label>
+        <input type="number" id="visao" name="visao"><br>
+        <br>
+        <label for="cruzamentos">Cruzamentos:</label>
+        <input type="number" id="cruzamentos" name="cruzamentos"><br>
+        <br>
+        <label for="dribles">Equilibrio:</label>
+        <input type="number" id="equilibrio" name="equilibrio"><br>
+        <br>
+        <label for="agilidade">Agilidade:</label>
+        <input type="number" id="agilidade" name="agilidade"><br>
+        <br>
+        <label for="dribles">Dribes:</label>
+        <input type="number" id="dribles" name="dribles"><br>
+        <br>
+        <button style="margin-left: 4%; cursor: pointer;" name="button" type="submit" id="btnSalvar">Salvar</button>
+      </form>
+    </main>
+  
+  <script>
+    const jogadorForm = document.getElementById('jogadorForm');
+
+    jogadorForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const nome = document.getElementById('nome').value;
+      const time = document.getElementById('time').value;
+      const idade = document.getElementById('idade').value;
+      const aceleracao = document.getElementById('aceleracao').value || null;
+      const velocidadeSprint = document.getElementById('velocidadeSprint').value || null;
+      const finalizacao = document.getElementById('finalizacao').value || null;
+      const forcaChute = document.getElementById('forcaChute').value || null;
+      const chutesLongos = document.getElementById('chutesLongos').value || null;
+      const penaltis = document.getElementById('penaltis').value || null;
+      const visao = document.getElementById('visao').value || null;
+      const cruzamentos = document.getElementById('cruzamentos').value || null;
+      const equilibrio = document.getElementById('equilibrio').value || null;
+      const agilidade = document.getElementById('agilidade').value || null;
+      const dribles = document.getElementById('dribles').value || null;
+
+      const jogadorData = {
+        nome,
+        time,
+        idade,
+        aceleracao,
+        velocidadeSprint,
+        finalizacao,
+        forcaChute,
+        chutesLongos,
+        penaltis,
+        visao,
+        cruzamentos,
+        equilibrio,
+        agilidade,
+        dribles,
+      };
+
+      fetch('/salvarJogador', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(jogadorData),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Resposta do servidor:', data);
+
+      if (data.success) {
+        alert('Jogador cadastrado com sucesso!');
+
+        jogadorForm.reset();
+      } else {
+    
+        alert('Erro ao cadastrar jogador. Por favor, verifique os campos e tente novamente.');
+      }
+    })
+    .catch(error => {
+      alert('Jogador cadastrado com sucesso!');
+    });
+  });
+
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "jogador",
+  "version": "1.0.0",
+  "description": "jogador de futebol",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.17.1",
+    "mysql2": "^3.5.2",
+    "sequelize": "^6.32.1"
+  }
+}
